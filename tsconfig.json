@@ -18,9 +18,20 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+
+    "baseUrl": "./src",
+    "paths": {
+      "@/hooks/*": ["hooks/*"],
+      "@/components/*": ["components/*"],
+      "@/services/*": ["services/*"],
+      "@/atoms/*": ["atoms/*"],
+      "@/interfaces/*": ["interfaces/*"],
+      "@/constants/*": ["constants/*"],
+      "@/pages/*": ["Pages/*"]
+    }
   },
   "include": ["src"],
-  "exclude": ["./vite.config.ts"],
+  "exclude": ["vite.config.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

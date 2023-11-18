@@ -1,4 +1,2 @@
-:root {
-  font-family: 'Roboto', sans-serif;
-  font-weight: 400;
-}
+@import url(./styles/globals.css);
+@import url(./styles/layout.css);

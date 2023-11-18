@@ -1,0 +1,49 @@
+[
+  {
+    "baseData": {
+      "id": 1,
+      "name": "Teszt Projekt V1",
+      "description": "Ez az első teszt projektünk leírása."
+    },
+    "members": [
+      {
+        "name": "Kiss Géza",
+        "role": "Product Owner"
+      },
+      {
+        "name": "Nagy Ádám",
+        "role": "Üzleti elemző"
+      },
+      {
+        "name": "Szabó Levente",
+        "role": "Renszerszervező"
+      },
+      {
+        "name": "Kovács László",
+        "role": "Solution Architect"
+      },
+      {
+        "name": "Lázár Tamás",
+        "role": "Backend Developer"
+      },
+      {
+        "name": "Horváth Zsolt",
+        "role": "Frontend Developer"
+      },
+      {
+        "name": "Mészáros Márk",
+        "role": "Test Engineer"
+      }
+    ],
+    "externals": [
+      {
+        "name": "BRS",
+        "url": "https://unece.org/fileadmin/DAM/cefact/brs/BRS_ElectronicDataExchangeProxy_v0.4.0.pdf"
+      },
+      {
+        "name": "Design assets",
+        "url": "https://www.freepik.com/free-photos-vectors/geometric-shapes"
+      }
+    ]
+  }
+]
