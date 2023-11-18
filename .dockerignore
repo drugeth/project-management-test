@@ -1,0 +1,9 @@
+**/node_modules
+build
+.idea
+.gitignore
+.stylelintrc.json
+.editorconfig
+.eslintrc.json
+.prettierrc.json
+.prettierignore

@@ -1,0 +1,16 @@
+version: "2.2"
+
+services:
+  app:
+    container_name: project-management-test
+    image: project-management-test
+    build:
+      context: .
+      target: development
+      dockerfile: Dockerfile
+    volumes:
+      - ./src:/app/src
+    environment:
+      - WATCHPACK_POLLING=true
+    ports:
+      - 4002:4002
