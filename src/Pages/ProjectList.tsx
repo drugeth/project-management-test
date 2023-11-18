@@ -6,6 +6,7 @@ import ProjectCard from "@/components/ProjectCard/ProjectCard";
 import { Grid, Typography } from "@mui/material";
 import Layout from "@/components/Layout/Layout";
 import ApiService from "@/services/ApiService";
+import { Link } from "wouter";
 
 const ProjectList = () => {
   const [projectData, setProjectData] = useRecoilState(projectListState);
@@ -30,7 +31,7 @@ const ProjectList = () => {
     <Layout>
       <Grid container spacing={2}>
         <Grid item xs={12}>
-          <Typography variant="h2">Projektek listázása</Typography>
+          <Typography variant="h1">Projektek listázása</Typography>
         </Grid>
         {projectData.map((item) => {
           return (
@@ -44,6 +45,9 @@ const ProjectList = () => {
             </Grid>
           );
         })}
+      </Grid>
+      <Grid item xs={12}>
+        <Link href="/new-project">Hozzáad</Link>
       </Grid>
     </Layout>
   );
