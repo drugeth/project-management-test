@@ -1,7 +1,7 @@
 import { Link } from "wouter";
 import { Avatar, Card, CardActions, CardContent, Typography } from "@mui/material";
 
-import { getPlaceholderImage } from "@/services/PlaceHolderImageService";
+import { getPlaceholderImage } from "@/services/PlaceholderImageService";
 import { getInitials } from "@/services/inititalsService";
 
 interface ProjectCardInterface {

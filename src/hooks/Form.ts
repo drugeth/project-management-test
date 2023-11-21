@@ -1,5 +1,5 @@
 import { ValidatorInterface } from "@/interfaces/ValidatorInterface";
-import { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 
 interface FormProps {
   values: { [key: string]: string };
@@ -17,21 +17,10 @@ const useForm = (
   const [values, setValues] = useState(initialValues);
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
-  /*useEffect(() => {
-    console.log(values);
-  }, [values]);*/
-
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setValues((prevValues) => ({ ...prevValues, [name]: value }));
     setErrors((prevErrors) => ({ ...prevErrors, [name]: validator[name]?.(value) || "" }));
-    /*setErrors((prevErrors) => {
-      if (prevErrors[name]) {
-        const { [name]: _, ...rest } = prevErrors;
-        return rest;
-      }
-      return prevErrors;
-    });*/
   };
 
   const removeLastField = () => {

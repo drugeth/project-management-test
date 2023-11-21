@@ -23,11 +23,13 @@ const ProjectExternals: FC = () => {
     "member[0].name": "",
     "member[0].url": "",
   };
-  const validator: ValidatorInterface = {};
+  const validator: ValidatorInterface = {
+    "member[0].name": (value) => (!value ? langData?.validatorRequired : undefined),
+    "member[0].url": (value) => (!value ? langData?.validatorRequired : undefined),
+  };
 
   useEffect(() => {
     if (newProjectData && "externals" in newProjectData!) {
-      console.log(newProjectData);
       setProjectList((prev) => [...prev, newProjectData as ProjectInterface]);
       setNewProjectData(null);
       setLocation("/");
@@ -127,7 +129,7 @@ const ProjectExternals: FC = () => {
                     } as ChangeEvent<HTMLInputElement>)
                   }
                 />
-                {errors[fieldName] && <div style={{ color: "red" }}>{errors[fieldName]}</div>}
+                {errors[fieldName] && <div className="error-text">{errors[fieldName]}</div>}
               </Grid>
             </Fragment>
           ))}

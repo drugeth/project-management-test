@@ -1,33 +1,17 @@
-import { useEffect } from "react";
 import { Link } from "wouter";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilValue } from "recoil";
 import { Grid, Typography } from "@mui/material";
 
-import { filteredProjectListSelector } from "../selectors/selectors";
-import { langDataState, projectListState } from "@/atoms/atoms";
+import { filteredProjectListSelector } from "@/selectors/selectors";
+import { langDataState } from "@/atoms/atoms";
 import Layout from "@/components/Layout/Layout";
-import ProjectCard from "@/components/ProjectCard/ProjectCard";
-import ProjectSearch from "@/components/ProjectSearch/ProjectSearch";
-import AddIcon from "@/components/SVG/AddIcon";
-import { getLanguageData, getProjectData } from "@/services/dataSourcesService";
+import ProjectCard from "@/components/ui/ProjectCard/ProjectCard";
+import ProjectSearch from "@/components/ui/ProjectSearch/ProjectSearch";
+import AddIcon from "@/components/ui/SVG/AddIcon";
 
 const ProjectList = () => {
-  const [projectData, setProjectData] = useRecoilState(projectListState);
-  const [langData, setLangData] = useRecoilState(langDataState);
+  const langData = useRecoilValue(langDataState);
   const filteredProjects = useRecoilValue(filteredProjectListSelector);
-
-  useEffect(() => {
-    if (!projectData.length) {
-      getProjectData()
-        .then((response) => {
-          setProjectData(response);
-          getLanguageData()
-            .then((response) => setLangData(response))
-            .catch((error) => console.log(error));
-        })
-        .catch((error) => console.log(error));
-    }
-  }, [projectData]);
 
   return (
     <Layout>

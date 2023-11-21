@@ -1,6 +1,7 @@
 .project-card.MuiPaper-root {
-  padding: 1.5rem;
   box-shadow: 4px 4px 25px 5px rgba(0, 0, 0, 0.05);
+  height: 100%;
+  padding: 1.5rem;
 }
 
 .project-card .MuiCardContent-root {
@@ -25,13 +26,13 @@
   font-weight: 500;
   height: 48px;
   margin-top: 24px;
-  padding: 2px 32px;
+  padding: 2px 40px 2px 32px;
   text-decoration: none;
-  width: 120px;
+  width: fit-content;
 }
 
 .add-project-link svg {
-  width: 36px;
+  width: 32px;
 }
 
 .MuiStepper-root {

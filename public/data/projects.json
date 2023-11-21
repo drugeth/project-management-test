@@ -2,8 +2,8 @@
   {
     "baseData": {
       "id": 1,
-      "name": "Teszt Projekt V1",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer fermentum viverra felis sit amet placerat. Donec cursus magna eget nulla congue porta."
+      "name": "Energiatakarékos IoT Rendszerfejlesztés",
+      "description": "A projekt célja egy olyan energiatakarékos IoT rendszer kifejlesztése, amely optimalizálja az energiafelhasználást a háztartásokban. Az intelligens rendszer szenzorok és okos vezérlők segítségével automatikusan szabályozza a világítást, a fűtést és az elektromos eszközöket, maximalizálva ezzel az energiahatékonyságot és csökkentve a költségeket."
     },
     "members": [
       {
@@ -49,8 +49,8 @@
   {
     "baseData": {
       "id": 2,
-      "name": "Másik projekt",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer fermentum viverra felis sit amet placerat. Donec cursus magna eget nulla congue porta."
+      "name": "Kiberbiztonsági Platform Fejlesztése",
+      "description": "A kiberbiztonsági platform projekt célja egy átfogó és dinamikus biztonsági megoldás kialakítása vállalati környezetek számára. A rendszer automatizált fenyegetésérzékelést, sebezhetőségkezelést és válaszreakciókat kínál, biztosítva a vállalatok számára a legújabb kiberbiztonsági védelmet a fejlődő digitális környezetben."
     },
     "members": [
       {
@@ -96,8 +96,8 @@
   {
     "baseData": {
       "id": 3,
-      "name": "Régi projekt",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer fermentum viverra felis sit amet placerat. Donec cursus magna eget nulla congue porta."
+      "name": "Virtuális Valóság Alapú Oktatási Platform",
+      "description": "A virtuális valóság alapú oktatási platform projekt célja egy innovatív és interaktív tanulási élmény létrehozása. Az alkalmazás virtuális valóság technológiát alkalmazva lehetővé teszi a diákok számára, hogy részt vegyenek interaktív virtuális tanórákon és szimulációkon, elősegítve ezzel a hatékony és költséghatékony oktatást."
     },
     "members": [
       {

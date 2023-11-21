@@ -1,7 +1,8 @@
-import { langDataState } from "@/atoms/atoms";
-import { Container, Typography } from "@mui/material";
 import { useRecoilValue } from "recoil";
 import { Link } from "wouter";
+import { Container, Typography } from "@mui/material";
+
+import { langDataState } from "@/atoms/atoms";
 
 const Page404 = () => {
   const langData = useRecoilValue(langDataState);

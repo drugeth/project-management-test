@@ -22,15 +22,15 @@ const ProjectBaseData: FC = () => {
   const validator: ValidatorInterface = {
     name: (value) =>
       !value
-        ? "A név mező kitöltése kötelező"
+        ? langData?.validatorRequired
         : value.length > 255
-        ? "A név maximális hossza 255 karakter lehet"
+        ? langData?.validatorPerojectNameLength
         : undefined,
     description: (value) =>
       value && value.length < 50
-        ? "Leírás minimális hossza 50 karakter"
+        ? langData?.validatorDescriptionMinLength
         : value.length > 500
-        ? "Leírás maximális hossza 500 karakter lehet."
+        ? langData?.validatorDescriptionMaxLength
         : undefined,
   };
 
@@ -71,7 +71,7 @@ const ProjectBaseData: FC = () => {
             value={values.name}
             onChange={handleChange}
           />
-          {errors.name && <div>{errors.name}</div>}
+          {errors.name && <div className="error-text">{errors.name}</div>}
         </Grid>
 
         <Grid item xs={12}>
@@ -85,7 +85,7 @@ const ProjectBaseData: FC = () => {
             value={values.description}
             onChange={handleChange}
           />
-          {errors.description && <div>{errors.description}</div>}
+          {errors.description && <div className="error-text">{errors.description}</div>}
         </Grid>
         <Grid item xs={12}>
           <ActionButtons callback={handleCallback} />

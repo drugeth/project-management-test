@@ -20,7 +20,7 @@ module.exports = {
           ["@/services", "./src/services"],
           ["@/atoms", "./src/atoms"],
           ["@/interfaces", "./src/interfaces"],
-          ["@/constants", "./src/constants"],
+          ["@/selectors", "./src/selectors"],
         ],
         extensions: [".js", ".jsx", ".ts", ".tsx", ".json"],
       },

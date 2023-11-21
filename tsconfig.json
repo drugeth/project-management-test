@@ -28,7 +28,8 @@
       "@/atoms/*": ["atoms/*"],
       "@/interfaces/*": ["interfaces/*"],
       "@/constants/*": ["constants/*"],
-      "@/pages/*": ["Pages/*"]
+      "@/pages/*": ["Pages/*"],
+      "@/selectors/*": ["selectors/*"]
     }
   },
   "include": ["src"],

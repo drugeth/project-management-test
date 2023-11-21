@@ -70,3 +70,11 @@ hr {
   height: 1px;
   margin: 32px 0 16px 0;
 }
+
+.error-text {
+  font-size: 12px;
+  color: var(--error-color);
+  font-weight: 500;
+  padding-left: 8px;
+  padding-top: 4px;
+}

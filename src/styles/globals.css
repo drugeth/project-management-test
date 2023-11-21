@@ -17,6 +17,10 @@ body {
   min-height: 100dvh;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 [href] {
   cursor: pointer;
 }

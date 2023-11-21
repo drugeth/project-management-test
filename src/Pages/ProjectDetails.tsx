@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { Link, useParams } from "wouter";
 import {
   Avatar,
@@ -10,29 +9,19 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilValue } from "recoil";
 
 import Layout from "@/components/Layout/Layout";
-import { dyanimcProjectSelector } from "../selectors/selectors";
+import { dyanimcProjectSelector } from "@/selectors/selectors";
 import { getPlaceholderImage } from "@/services/PlaceholderImageService";
 import { getInitials } from "@/services/inititalsService";
-import { getProjectData } from "@/services/dataSourcesService";
-import { langDataState, projectListState } from "@/atoms/atoms";
+import { langDataState } from "@/atoms/atoms";
 
 const ProjectDetails = () => {
   const params = useParams();
-  const [projectData, setProjectData] = useRecoilState(projectListState);
   const dynamicSelector = dyanimcProjectSelector(params.id);
   const selectedProjectData = useRecoilValue(dynamicSelector);
   const langData = useRecoilValue(langDataState);
-
-  useEffect(() => {
-    if (!projectData.length) {
-      getProjectData()
-        .then((response) => setProjectData(response))
-        .catch((error) => console.log(error));
-    }
-  }, [projectData]);
 
   if (!selectedProjectData) {
     return (

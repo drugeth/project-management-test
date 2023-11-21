@@ -21,7 +21,10 @@ const ProjectMembers: FC = () => {
     "member[0].name": "",
     "member[0].role": "",
   };
-  const validator: ValidatorInterface = {};
+  const validator: ValidatorInterface = {
+    "member[0].name": (value) => (!value ? langData?.validatorRequired : undefined),
+    "member[0].role": (value) => (!value ? langData?.validatorRequired : undefined),
+  };
 
   const onSubmit = (values: { [key: string]: string }) => {
     setNewProjectData((prev) => {
@@ -61,11 +64,8 @@ const ProjectMembers: FC = () => {
     initialValues[newNameField] = "";
     initialValues[newRoleField] = "";
 
-    validator[newNameField] = (value: string) =>
-      value.trim() === "" ? langData?.validatorRequired : undefined;
-
-    validator[newRoleField] = (value: string) =>
-      value.trim() === "" ? langData?.validatorRequired : undefined;
+    validator[newNameField] = (value: string) => (!value ? langData?.validatorRequired : undefined);
+    validator[newRoleField] = (value: string) => (!value ? langData?.validatorRequired : undefined);
 
     handleChange({
       target: {
@@ -83,7 +83,6 @@ const ProjectMembers: FC = () => {
   };
 
   const removeField = () => {
-    removeLastField();
     removeLastField();
   };
 
@@ -114,7 +113,7 @@ const ProjectMembers: FC = () => {
                     } as ChangeEvent<HTMLInputElement>)
                   }
                 />
-                {errors[fieldName] && <div style={{ color: "red" }}>{errors[fieldName]}</div>}
+                {errors[fieldName] && <div className="error-text">{errors[fieldName]}</div>}
               </Grid>
             </Fragment>
           ))}

@@ -23,6 +23,9 @@
   "addNewMember": "Új tag hozzáadása",
   "deleteLastMember": "Utolsó tag törlése",
   "validatorRequired": "A mező kitöltése kötelező",
+  "validatorPerojectNameLength": "A név maximális hossza 255 karakter lehet",
+  "validatorDescriptionMinLength": "Leírás minimális hossza 50 karakter",
+  "validatorDescriptionMaxLength": "Leírás maximális hossza 500 karakter",
   "externalName": "Megnevezés",
   "externalLink": "URL"
 }

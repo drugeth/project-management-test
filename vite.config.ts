@@ -25,6 +25,7 @@ export default defineConfig({
       { find: "@/pages", replacement: path.resolve(__dirname, "src/Pages") },
       { find: "@/services", replacement: path.resolve(__dirname, "src/services") },
       { find: "@/interfaces", replacement: path.resolve(__dirname, "src/interfaces") },
+      { find: "@/selectors", replacement: path.resolve(__dirname, "src/selectors") },
     ],
   },
 });

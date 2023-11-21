@@ -1,10 +1,11 @@
 import { Grid, Step, StepButton, Stepper, Typography } from "@mui/material";
-import Layout from "@/components/Layout/Layout";
-import ProjectBaseData from "@/components/Wizard/ProjectBaseData";
-import ProjectMembers from "@/components/Wizard/ProjectMembers";
-import ProjectExternals from "@/components/Wizard/ProjectExternals";
 import { useRecoilState, useRecoilValue } from "recoil";
+
 import { currentWizardStepState, langDataState } from "@/atoms/atoms";
+import Layout from "@/components/Layout/Layout";
+import ProjectBaseData from "@/components/Feature/Wizard/ProjectBaseData";
+import ProjectMembers from "@/components/Feature/Wizard/ProjectMembers";
+import ProjectExternals from "@/components/Feature/Wizard/ProjectExternals";
 
 const NewProject = () => {
   const [activeStep, setActiveStep] = useRecoilState(currentWizardStepState);
@@ -31,7 +32,7 @@ const NewProject = () => {
               const stepProps: { completed?: boolean } = {};
 
               return (
-                <Step key={label} {...stepProps}>
+                <Step key={index} {...stepProps}>
                   <StepButton color="inherit" onClick={handleStep(index)}>
                     {label}
                   </StepButton>
