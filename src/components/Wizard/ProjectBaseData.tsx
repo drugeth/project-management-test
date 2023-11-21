@@ -1,9 +1,11 @@
 import { FC, MouseEvent, useRef } from "react";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import useForm from "@/hooks/Form";
+
 import { Grid, TextField } from "@mui/material";
 import ActionButtons from "./ActionButtons";
-import { useRecoilValue, useSetRecoilState } from "recoil";
 import { currentWizardStepState, newProjectState, projectListState } from "@/atoms/atoms";
+import { ValidatorInterface } from "@/interfaces/ValidatorInterface";
 
 const ProjectBaseData: FC = () => {
   const projectData = useRecoilValue(projectListState);

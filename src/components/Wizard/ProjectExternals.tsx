@@ -1,5 +1,145 @@
-const ProjectExternals = () => {
-  return <div>Külső anyagok</div>;
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { ChangeEvent, FC, Fragment, MouseEvent, useEffect, useRef } from "react";
+import useForm from "@/hooks/Form";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { Button, Grid, TextField, Typography } from "@mui/material";
+
+import ActionButtons from "./ActionButtons";
+import { newProjectState, projectListState } from "@/atoms/atoms";
+import { ValidatorInterface } from "@/interfaces/ValidatorInterface";
+import { ExternalInterface, ProjectInterface } from "@/interfaces/ProjectInterface";
+import { useLocation } from "wouter";
+
+interface FormValues {
+  [key: string]: string;
+}
+
+const ProjectExternals: FC = () => {
+  const formRef = useRef<HTMLFormElement | null>(null);
+  const [newProjectData, setNewProjectData] = useRecoilState(newProjectState);
+  const [, setProjectList] = useRecoilState(projectListState);
+  const [, setLocation] = useLocation();
+  const initialValues: FormValues = {};
+  const validator: ValidatorInterface = {};
+
+  useEffect(() => {
+    if ("externals" in newProjectData!) {
+      console.log(newProjectData);
+      setProjectList((prev) => [...prev, newProjectData as ProjectInterface]);
+      setNewProjectData(null);
+      setLocation("/");
+    }
+  }, [newProjectData]);
+
+  const onSubmit = (values: { [key: string]: string }) => {
+    setNewProjectData((prev) => {
+      const newProjectData = Object.assign({}, prev);
+      const formData: ExternalInterface[] = [];
+
+      Object.keys(values).forEach((key) => {
+        const matches = key.match(/\[(\d+)\]/);
+        const idx = Number(matches![1]);
+        const keyName = key.substring(key.indexOf(".") + 1);
+
+        if (!formData[idx]) {
+          formData[idx] = { name: "", url: "" };
+        }
+
+        formData[idx][keyName] = values[key];
+      });
+
+      newProjectData.externals = formData;
+
+      return newProjectData;
+    });
+  };
+
+  const { values, errors, handleChange, handleSubmit, resetFields, removeLastField } = useForm(
+    initialValues,
+    validator,
+    onSubmit
+  );
+
+  const addField = () => {
+    const index = Object.keys(values).length / 2;
+    const newNameField = `document[${index}].name`;
+    const newUrlField = `document[${index}].url`;
+
+    initialValues[newNameField] = "";
+    initialValues[newUrlField] = "";
+
+    validator[newNameField] = (value: string) =>
+      value.trim() === "" ? "A mező kitöltése kötelező" : undefined;
+
+    validator[newUrlField] = (value: string) =>
+      value.trim() === "" ? "A mező kitöltése kötelező" : undefined;
+
+    handleChange({
+      target: {
+        name: newNameField,
+        value: initialValues[newNameField],
+      },
+    } as ChangeEvent<HTMLInputElement>);
+
+    handleChange({
+      target: {
+        name: newUrlField,
+        value: initialValues[newUrlField],
+      },
+    } as ChangeEvent<HTMLInputElement>);
+  };
+
+  const removeField = () => {
+    removeLastField();
+  };
+
+  const handleCallback = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    formRef.current?.dispatchEvent(new Event("submit", { bubbles: true }));
+  };
+
+  return (
+    <div>
+      <form onSubmit={handleSubmit} ref={formRef}>
+        <Grid container spacing={2}>
+          <Grid item xs={12}>
+            <Typography variant="h2">Projekt tagok hozzáadása</Typography>
+          </Grid>
+          {Object.keys(values).map((fieldName, index) => (
+            <Fragment key={fieldName}>
+              <Grid item xs={12}>
+                <TextField
+                  fullWidth
+                  variant="outlined"
+                  name={fieldName}
+                  label={fieldName.indexOf("name") !== -1 ? "Megnevezés" : "URL"}
+                  value={values[`values[${index}].name`]}
+                  onChange={(e) =>
+                    handleChange({
+                      target: { name: fieldName, value: e.target.value },
+                    } as ChangeEvent<HTMLInputElement>)
+                  }
+                />
+                {errors[fieldName] && <div style={{ color: "red" }}>{errors[fieldName]}</div>}
+              </Grid>
+            </Fragment>
+          ))}
+          <Grid item xs={12}>
+            <Button variant="outlined" onClick={addField}>
+              Új tag hozzáadása
+            </Button>
+            <Button variant="outlined" onClick={removeField}>
+              Utolsó tag törlése
+            </Button>
+          </Grid>
+          <hr />
+          <Grid item xs={12}>
+            <ActionButtons callback={handleCallback} />
+          </Grid>
+        </Grid>
+      </form>
+    </div>
+  );
 };
 
 export default ProjectExternals;

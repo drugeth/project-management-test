@@ -7,11 +7,13 @@ export interface ProjectBaseDataInterface {
 export interface ProjectMemberInterface {
   name: string;
   role: string;
+  [key: string]: string;
 }
 
 export interface ExternalInterface {
   name: string;
   url: string;
+  [key: string]: string;
 }
 
 export interface ProjectInterface {

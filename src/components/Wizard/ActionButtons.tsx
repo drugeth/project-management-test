@@ -8,7 +8,7 @@ interface ChildProps {
 }
 
 const ActionButtons: FC<ChildProps> = ({ callback }) => {
-  const [activeStep] = useRecoilState(currentWizardStepState);
+  const [activeStep, setActiveStep] = useRecoilState(currentWizardStepState);
 
   const handleSubmitClick = (e: MouseEvent<HTMLButtonElement>) => {
     callback(e);
@@ -16,7 +16,11 @@ const ActionButtons: FC<ChildProps> = ({ callback }) => {
 
   return (
     <>
-      {activeStep > 0 && <Button variant="outlined">Vissza</Button>}
+      {activeStep > 0 && (
+        <Button variant="outlined" onClick={() => setActiveStep((prev) => prev - 1)}>
+          Vissza
+        </Button>
+      )}
       <Button variant="contained" disableElevation onClick={handleSubmitClick} type="submit">
         Tovább
       </Button>
