@@ -1,10 +1,10 @@
 import { ChangeEvent, FC, Fragment, MouseEvent, useRef } from "react";
 import useForm from "@/hooks/Form";
-import { useSetRecoilState } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import { Button, Grid, TextField, Typography } from "@mui/material";
 
 import ActionButtons from "./ActionButtons";
-import { currentWizardStepState, newProjectState } from "@/atoms/atoms";
+import { currentWizardStepState, langDataState, newProjectState } from "@/atoms/atoms";
 import { ValidatorInterface } from "@/interfaces/ValidatorInterface";
 import { ProjectMemberInterface } from "@/interfaces/ProjectInterface";
 
@@ -16,6 +16,7 @@ const ProjectMembers: FC = () => {
   const formRef = useRef<HTMLFormElement | null>(null);
   const setActiveStep = useSetRecoilState(currentWizardStepState);
   const setNewProjectData = useSetRecoilState(newProjectState);
+  const langData = useRecoilValue(langDataState);
   const initialValues: FormValues = {
     "member[0].name": "",
     "member[0].role": "",
@@ -46,7 +47,7 @@ const ProjectMembers: FC = () => {
     setActiveStep((prev) => prev + 1);
   };
 
-  const { values, errors, handleChange, handleSubmit, resetFields, removeLastField } = useForm(
+  const { values, errors, handleChange, handleSubmit, removeLastField } = useForm(
     initialValues,
     validator,
     onSubmit
@@ -61,10 +62,10 @@ const ProjectMembers: FC = () => {
     initialValues[newRoleField] = "";
 
     validator[newNameField] = (value: string) =>
-      value.trim() === "" ? "A mező kitöltése kötelező" : undefined;
+      value.trim() === "" ? langData?.validatorRequired : undefined;
 
     validator[newRoleField] = (value: string) =>
-      value.trim() === "" ? "A mező kitöltése kötelező" : undefined;
+      value.trim() === "" ? langData?.validatorRequired : undefined;
 
     handleChange({
       target: {
@@ -83,6 +84,7 @@ const ProjectMembers: FC = () => {
 
   const removeField = () => {
     removeLastField();
+    removeLastField();
   };
 
   const handleCallback = (e: MouseEvent<HTMLButtonElement>) => {
@@ -95,7 +97,7 @@ const ProjectMembers: FC = () => {
       <form onSubmit={handleSubmit} ref={formRef}>
         <Grid container spacing={2}>
           <Grid item xs={12}>
-            <Typography variant="h2">Projekt tagok hozzáadása</Typography>
+            <Typography variant="h2">{langData?.addProjectMember}</Typography>
           </Grid>
           {Object.keys(values).map((fieldName, index) => (
             <Fragment key={fieldName}>
@@ -123,10 +125,10 @@ const ProjectMembers: FC = () => {
               onClick={addField}
               sx={{ marginRight: "16px" }}
             >
-              Új tag hozzáadása
+              {langData?.addNewMember}
             </Button>
             <Button type="button" variant="outlined" onClick={removeField} color="error">
-              Utolsó tag törlése
+              {langData?.deleteLastMember}
             </Button>
             <hr />
           </Grid>

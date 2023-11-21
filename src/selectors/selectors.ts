@@ -1,15 +1,15 @@
-import { selector } from "recoil";
+import { selector, selectorFamily } from "recoil";
 import { projectListState, searchKeywordState } from "@/atoms/atoms";
 
-export const dyanimcProjectSelector = (id: string | undefined) => {
-  return selector({
-    key: "projectSelector",
-    get: ({ get }) => {
+export const dyanimcProjectSelector = selectorFamily({
+  key: "projectSelector",
+  get:
+    (id: string | undefined) =>
+    ({ get }) => {
       const projects = get(projectListState);
       return projects.find((project) => project.baseData.id === Number(id)) || null;
     },
-  });
-};
+});
 
 export const filteredProjectListSelector = selector({
   key: "filteredProjectListState",

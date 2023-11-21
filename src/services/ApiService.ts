@@ -13,7 +13,6 @@ class ApiService {
   }
 
   private handleResponse<T>(response: AxiosResponse<T>): T {
-    // Itt lehetőséged van a választ feldolgozni, hibakezelést végezni, stb.
     return response.data;
   }
 
@@ -21,8 +20,6 @@ class ApiService {
     const response = await axios.get<T>(url);
     return this.handleResponse<T>(response);
   }
-
-  // További metódusok (post, put, stb.) hozzáadhatók szükség esetén
 }
 
 export default ApiService;

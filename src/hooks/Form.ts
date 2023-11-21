@@ -6,7 +6,6 @@ interface FormProps {
   errors: { [key: string]: string };
   handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
   handleSubmit: (e: FormEvent<HTMLFormElement>) => void;
-  resetFields: () => void;
   removeLastField: () => void;
 }
 
@@ -35,26 +34,21 @@ const useForm = (
     });*/
   };
 
-  const resetFields = () => {
-    setValues(initialValues);
-    setErrors({});
-  };
-
   const removeLastField = () => {
-    const keys = Object.keys(values);
-    if (keys.length > 0) {
-      const lastKey = keys[keys.length - 1];
-      const { [lastKey]: _removedValue, ...remainingValues } = values;
+    setValues((prevValues) => {
+      const keys = Object.keys(prevValues);
+      const lastTwoKeys = keys.slice(-1);
+      const { [lastTwoKeys[0]]: _, [lastTwoKeys[1]]: __, ...remainingValues } = prevValues;
+      return remainingValues;
+    });
 
-      setValues(remainingValues);
-      setErrors((prevErrors) => {
-        if (prevErrors[lastKey]) {
-          const { [lastKey]: _, ...rest } = prevErrors;
-          return rest;
-        }
-        return prevErrors;
-      });
-    }
+    setErrors((prevErrors) => {
+      const keys = Object.keys(prevErrors);
+      const lastTwoKeys = keys.slice(-1);
+      const result = { ...prevErrors };
+      lastTwoKeys.forEach((key) => delete result[key]);
+      return result;
+    });
   };
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -74,7 +68,7 @@ const useForm = (
     }
   };
 
-  return { values, errors, handleChange, handleSubmit, resetFields, removeLastField };
+  return { values, errors, handleChange, handleSubmit, removeLastField };
 };
 
 export default useForm;

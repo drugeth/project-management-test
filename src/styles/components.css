@@ -49,10 +49,6 @@
   color: var(--primary-color);
 }
 
-.MuiInputBase-root {
-  background-color: var(--white-bg-color);
-}
-
 .MuiInputBase-root .Mui-focused {
   border-color: red !important;
 }
@@ -63,6 +59,15 @@
 
 .MuiFormControl-root .MuiInputBase-root.Mui-focused .MuiOutlinedInput-notchedOutline {
   border-color: var(--primary-color);
+}
+
+.MuiFormControl-root.MuiTextField-root .MuiInputBase-root {
+  border-radius: 8px;
+  background-color: var(--white-bg-color);
+}
+
+.MuiFormControl-root.MuiTextField-root .MuiInputBase-root .MuiOutlinedInput-notchedOutline {
+  border-radius: 8px;
 }
 
 .MuiButton-root.MuiButton-contained.MuiButton-containedPrimary {

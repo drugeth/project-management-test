@@ -1,41 +1,39 @@
 import { useEffect } from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { projectListState } from "@/atoms/atoms";
-import { ProjectInterface } from "@/interfaces/ProjectInterface";
-import ProjectCard from "@/components/ProjectCard/ProjectCard";
-import { Grid, Typography } from "@mui/material";
-import Layout from "@/components/Layout/Layout";
-import ApiService from "@/services/ApiService";
 import { Link } from "wouter";
-import ProjectSearch from "@/components/ProjectSearch/ProjectSearch";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { Grid, Typography } from "@mui/material";
+
 import { filteredProjectListSelector } from "../selectors/selectors";
+import { langDataState, projectListState } from "@/atoms/atoms";
+import Layout from "@/components/Layout/Layout";
+import ProjectCard from "@/components/ProjectCard/ProjectCard";
+import ProjectSearch from "@/components/ProjectSearch/ProjectSearch";
 import AddIcon from "@/components/SVG/AddIcon";
+import { getLanguageData, getProjectData } from "@/services/dataSourcesService";
 
 const ProjectList = () => {
   const [projectData, setProjectData] = useRecoilState(projectListState);
+  const [langData, setLangData] = useRecoilState(langDataState);
   const filteredProjects = useRecoilValue(filteredProjectListSelector);
 
-  const getProjectData = async () => {
-    const apiService = ApiService.getInstance();
-    try {
-      const resp: ProjectInterface[] = await apiService.get(
-        import.meta.env.VITE_APP_DATASOURCE_PROJECTS
-      );
-      setProjectData(resp);
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
   useEffect(() => {
-    if (!projectData.length) getProjectData();
-  }, []);
+    if (!projectData.length) {
+      getProjectData()
+        .then((response) => {
+          setProjectData(response);
+          getLanguageData()
+            .then((response) => setLangData(response))
+            .catch((error) => console.log(error));
+        })
+        .catch((error) => console.log(error));
+    }
+  }, [projectData]);
 
   return (
     <Layout>
       <Grid container spacing={2}>
         <Grid item xs={12} className="d--f jc--sb p--b1 ai--c">
-          <Typography variant="h1">Projektek listázása</Typography>
+          <Typography variant="h1">{langData?.listProjects}</Typography>
           <ProjectSearch />
         </Grid>
         {filteredProjects.map((item) => {
@@ -53,7 +51,7 @@ const ProjectList = () => {
       </Grid>
       <Grid item xs={12}>
         <Link className="add-project-link d--f ai--c" href="/new-project">
-          <AddIcon /> Hozzáad
+          <AddIcon /> {langData?.addButtonText}
         </Link>
       </Grid>
     </Layout>

@@ -1,14 +1,13 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { ChangeEvent, FC, Fragment, MouseEvent, useEffect, useRef } from "react";
 import useForm from "@/hooks/Form";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useLocation } from "wouter";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { Button, Grid, TextField, Typography } from "@mui/material";
 
 import ActionButtons from "./ActionButtons";
-import { newProjectState, projectListState } from "@/atoms/atoms";
+import { langDataState, newProjectState, projectListState } from "@/atoms/atoms";
 import { ValidatorInterface } from "@/interfaces/ValidatorInterface";
 import { ExternalInterface, ProjectInterface } from "@/interfaces/ProjectInterface";
-import { useLocation } from "wouter";
 
 interface FormValues {
   [key: string]: string;
@@ -18,6 +17,7 @@ const ProjectExternals: FC = () => {
   const formRef = useRef<HTMLFormElement | null>(null);
   const [newProjectData, setNewProjectData] = useRecoilState(newProjectState);
   const [, setProjectList] = useRecoilState(projectListState);
+  const langData = useRecoilValue(langDataState);
   const [, setLocation] = useLocation();
   const initialValues: FormValues = {
     "member[0].name": "",
@@ -57,7 +57,7 @@ const ProjectExternals: FC = () => {
     });
   };
 
-  const { values, errors, handleChange, handleSubmit, resetFields, removeLastField } = useForm(
+  const { values, errors, handleChange, handleSubmit, removeLastField } = useForm(
     initialValues,
     validator,
     onSubmit
@@ -72,10 +72,10 @@ const ProjectExternals: FC = () => {
     initialValues[newUrlField] = "";
 
     validator[newNameField] = (value: string) =>
-      value.trim() === "" ? "A mező kitöltése kötelező" : undefined;
+      value.trim() === "" ? langData?.validatorRequired : undefined;
 
     validator[newUrlField] = (value: string) =>
-      value.trim() === "" ? "A mező kitöltése kötelező" : undefined;
+      value.trim() === "" ? langData?.validatorRequired : undefined;
 
     handleChange({
       target: {
@@ -115,7 +115,11 @@ const ProjectExternals: FC = () => {
                   fullWidth
                   variant="outlined"
                   name={fieldName}
-                  label={fieldName.indexOf("name") !== -1 ? "Megnevezés" : "URL"}
+                  label={
+                    fieldName.indexOf("name") !== -1
+                      ? langData?.externalName
+                      : langData?.externalLink
+                  }
                   value={values[`values[${index}].name`]}
                   onChange={(e) =>
                     handleChange({

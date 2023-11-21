@@ -3,12 +3,17 @@ import Layout from "@/components/Layout/Layout";
 import ProjectBaseData from "@/components/Wizard/ProjectBaseData";
 import ProjectMembers from "@/components/Wizard/ProjectMembers";
 import ProjectExternals from "@/components/Wizard/ProjectExternals";
-import { useRecoilState } from "recoil";
-import { currentWizardStepState } from "@/atoms/atoms";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { currentWizardStepState, langDataState } from "@/atoms/atoms";
 
 const NewProject = () => {
   const [activeStep, setActiveStep] = useRecoilState(currentWizardStepState);
-  const steps = ["Alapadatok", "Résztvevők", "Hivatkozások"];
+  const langData = useRecoilValue(langDataState);
+  const steps = [
+    langData?.addProjectBaseData,
+    langData?.addProjectMembers,
+    langData?.addProjectExternals,
+  ];
 
   const handleStep = (step: number) => () => {
     setActiveStep(step);
@@ -18,7 +23,7 @@ const NewProject = () => {
     <Layout>
       <Grid container spacing={2}>
         <Grid item xs={12}>
-          <Typography variant="h1">Új projekt</Typography>
+          <Typography variant="h1">{langData?.addNewProject}</Typography>
         </Grid>
         <Grid item xs={12}>
           <Stepper activeStep={activeStep}>

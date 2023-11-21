@@ -1,32 +1,31 @@
-import { Avatar, Card, CardActions, CardContent, Typography } from "@mui/material";
 import { Link } from "wouter";
+import { Avatar, Card, CardActions, CardContent, Typography } from "@mui/material";
 
-type ProjectCard = {
+import { getPlaceholderImage } from "@/services/PlaceHolderImageService";
+import { getInitials } from "@/services/inititalsService";
+
+interface ProjectCardInterface {
   id: number;
   name: string;
   description: string;
-};
+}
 
-const ProjectCard = ({ id, name, description }: ProjectCard) => {
-  const getInitials = (): string => {
-    return name
-      .split(" ")
-      .splice(0, 2)
-      .map((el) => el.charAt(0))
-      .join("")
-      .toUpperCase();
-  };
-
+const ProjectCard = ({ id, name, description }: ProjectCardInterface) => {
   return (
     <Card className="project-card">
       <CardContent>
         <div className="title d--f ai--c">
           <Avatar
             alt={name}
-            src={`${
-              import.meta.env.VITE_APP_PLACEHOLDER_IMAGE_URL
-            }/?width=100&height=100&text=${getInitials()}&bgColor=%2300acda&textColor=%23ffffff&fontSize=36`}
-            sx={{ width: 56, height: 56 }}
+            src={getPlaceholderImage(
+              import.meta.env.VITE_APP_PLACEHOLDER_IMAGE_URL,
+              40,
+              40,
+              getInitials(name),
+              "00acda",
+              "ffffff",
+              16
+            )}
           />
           <Typography variant="h3">{name}</Typography>
         </div>

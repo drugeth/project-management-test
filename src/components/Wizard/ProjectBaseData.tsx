@@ -4,13 +4,19 @@ import useForm from "@/hooks/Form";
 
 import { Grid, TextField } from "@mui/material";
 import ActionButtons from "./ActionButtons";
-import { currentWizardStepState, newProjectState, projectListState } from "@/atoms/atoms";
+import {
+  currentWizardStepState,
+  langDataState,
+  newProjectState,
+  projectListState,
+} from "@/atoms/atoms";
 import { ValidatorInterface } from "@/interfaces/ValidatorInterface";
 
 const ProjectBaseData: FC = () => {
   const projectData = useRecoilValue(projectListState);
   const setNewProjectData = useSetRecoilState(newProjectState);
   const setActiveStep = useSetRecoilState(currentWizardStepState);
+  const langData = useRecoilValue(langDataState);
 
   const formRef = useRef<HTMLFormElement | null>(null);
   const validator: ValidatorInterface = {
@@ -61,7 +67,7 @@ const ProjectBaseData: FC = () => {
             fullWidth
             variant="outlined"
             name="name"
-            label="Projekt neve"
+            label={langData?.projectName}
             value={values.name}
             onChange={handleChange}
           />
@@ -73,7 +79,7 @@ const ProjectBaseData: FC = () => {
             fullWidth
             variant="outlined"
             name="description"
-            label="Projekt leírása"
+            label={langData?.projectDescription}
             multiline
             rows={4}
             value={values.description}

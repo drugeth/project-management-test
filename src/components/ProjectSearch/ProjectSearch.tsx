@@ -1,10 +1,10 @@
 import { searchKeywordState } from "@/atoms/atoms";
 import { TextField } from "@mui/material";
 import { ChangeEvent, FC } from "react";
-import { useSetRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 
 const ProjectSearch: FC = () => {
-  const setSearchKeyword = useSetRecoilState(searchKeywordState);
+  const [searchKeyword, setSearchKeyword] = useRecoilState(searchKeywordState);
 
   return (
     <>
@@ -13,6 +13,7 @@ const ProjectSearch: FC = () => {
         variant="outlined"
         label="Keresés"
         size="small"
+        value={searchKeyword}
         sx={{ backgroundColor: "var(--white-bg-color)" }}
       />
     </>
