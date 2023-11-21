@@ -1,21 +1,13 @@
-import { Link, useParams } from "wouter";
-import {
-  Avatar,
-  Grid,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow,
-  Typography,
-} from "@mui/material";
+import { useParams } from "wouter";
+import { Grid, Typography } from "@mui/material";
 import { useRecoilValue } from "recoil";
 
 import Layout from "@/components/Layout/Layout";
 import { dyanimcProjectSelector } from "@/selectors/selectors";
-import { getPlaceholderImage } from "@/services/PlaceholderImageService";
-import { getInitials } from "@/services/inititalsService";
 import { langDataState } from "@/atoms/atoms";
+import ProjectDetailsHeader from "@/components/ui/ProjectDetails/ProjectDetailsHeader";
+import ProjectDetailsMembers from "@/components/ui/ProjectDetails/ProjectDetailsMembers";
+import ProjectDetailsExternals from "@/components/ui/ProjectDetails/ProjectDetailsExternals";
 
 const ProjectDetails = () => {
   const params = useParams();
@@ -44,68 +36,20 @@ const ProjectDetails = () => {
           </Typography>
         </Grid>
         <Grid item xs={12}>
-          <div className="title d--f ai--c">
-            <Avatar
-              alt={selectedProjectData?.baseData.name}
-              src={getPlaceholderImage(
-                import.meta.env.VITE_APP_PLACEHOLDER_IMAGE_URL,
-                80,
-                80,
-                getInitials(selectedProjectData?.baseData.name),
-                "00acda",
-                "ffffff",
-                32
-              )}
-              sx={{ width: 80, height: 80, marginRight: "16px" }}
-            />
-            <div className="d--f fd--c">
-              <Typography variant="h2" sx={{ marginBottom: "6px" }}>
-                {selectedProjectData!.baseData.name}
-              </Typography>
-              <Typography variant="body1">{selectedProjectData!.baseData.description}</Typography>
-            </div>
-          </div>
+          <ProjectDetailsHeader
+            name={selectedProjectData.baseData.name}
+            description={selectedProjectData.baseData.description}
+          />
           <hr />
         </Grid>
         <Grid item xs={12}>
-          <Typography variant="h3">{langData?.members}:</Typography>
-          <Table sx={{ marginTop: "16px", marginBottom: "16px" }}>
-            <TableHead>
-              <TableRow>
-                <TableCell>{langData?.memberName}</TableCell>
-                <TableCell>{langData?.memberRole}</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {selectedProjectData.members.map((item, index) => (
-                <TableRow key={index}>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>{item.role}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
+          <ProjectDetailsMembers members={selectedProjectData.members} languageData={langData!} />
         </Grid>
         <Grid item xs={12}>
-          <Typography variant="h3">{langData?.externals}:</Typography>
-          <Table sx={{ marginTop: "16px", marginBottom: "16px" }}>
-            <TableHead>
-              <TableRow>
-                <TableCell>{langData?.externalsName}</TableCell>
-                <TableCell>{langData?.externalsLink}</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {selectedProjectData.externals.map((item, index) => (
-                <TableRow key={index}>
-                  <TableCell>{item.name}</TableCell>
-                  <TableCell>
-                    <Link href={item.url}>{item.url}</Link>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
+          <ProjectDetailsExternals
+            externals={selectedProjectData.externals}
+            languageData={langData!}
+          />
         </Grid>
       </Grid>
     </Layout>

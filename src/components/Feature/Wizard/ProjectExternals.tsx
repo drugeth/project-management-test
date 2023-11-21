@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { ChangeEvent, FC, Fragment, MouseEvent, useEffect, useRef } from "react";
 import useForm from "@/hooks/Form";
 import { useLocation } from "wouter";
