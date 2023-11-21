@@ -15,3 +15,8 @@ export const currentWizardStepState = atom({
   key: "currentWizardStepState",
   default: 0,
 });
+
+export const searchKeywordState = atom({
+  key: "searchKeywordState",
+  default: "",
+});
