@@ -12,6 +12,8 @@ const ProjectSearch: FC = () => {
         onChange={(e: ChangeEvent<HTMLInputElement>) => setSearchKeyword(e.target.value)}
         variant="outlined"
         label="Keresés"
+        size="small"
+        sx={{ backgroundColor: "var(--white-bg-color)" }}
       />
     </>
   );

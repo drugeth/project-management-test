@@ -19,11 +19,14 @@ const ProjectExternals: FC = () => {
   const [newProjectData, setNewProjectData] = useRecoilState(newProjectState);
   const [, setProjectList] = useRecoilState(projectListState);
   const [, setLocation] = useLocation();
-  const initialValues: FormValues = {};
+  const initialValues: FormValues = {
+    "member[0].name": "",
+    "member[0].url": "",
+  };
   const validator: ValidatorInterface = {};
 
   useEffect(() => {
-    if ("externals" in newProjectData!) {
+    if (newProjectData && "externals" in newProjectData!) {
       console.log(newProjectData);
       setProjectList((prev) => [...prev, newProjectData as ProjectInterface]);
       setNewProjectData(null);
@@ -103,11 +106,11 @@ const ProjectExternals: FC = () => {
       <form onSubmit={handleSubmit} ref={formRef}>
         <Grid container spacing={2}>
           <Grid item xs={12}>
-            <Typography variant="h2">Projekt tagok hozzáadása</Typography>
+            <Typography variant="h2">Kapcsolódó anyag hozzáadása</Typography>
           </Grid>
           {Object.keys(values).map((fieldName, index) => (
             <Fragment key={fieldName}>
-              <Grid item xs={12}>
+              <Grid item xs={12} md={6}>
                 <TextField
                   fullWidth
                   variant="outlined"
@@ -125,14 +128,14 @@ const ProjectExternals: FC = () => {
             </Fragment>
           ))}
           <Grid item xs={12}>
-            <Button variant="outlined" onClick={addField}>
-              Új tag hozzáadása
+            <Button variant="outlined" onClick={addField} sx={{ marginRight: "16px" }}>
+              Új link hozzáadása
             </Button>
-            <Button variant="outlined" onClick={removeField}>
-              Utolsó tag törlése
+            <Button variant="outlined" onClick={removeField} color="error">
+              Utolsó link törlése
             </Button>
+            <hr />
           </Grid>
-          <hr />
           <Grid item xs={12}>
             <ActionButtons callback={handleCallback} />
           </Grid>

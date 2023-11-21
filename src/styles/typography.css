@@ -1,0 +1,14 @@
+h1.MuiTypography-root {
+  font-size: 3rem;
+  font-weight: 400;
+}
+
+h2.MuiTypography-root {
+  font-size: 2rem;
+  font-weight: 300;
+}
+
+h3.MuiTypography-root {
+  font-size: 1.5rem;
+  font-weight: 400;
+}

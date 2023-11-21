@@ -9,6 +9,7 @@ import ApiService from "@/services/ApiService";
 import { Link } from "wouter";
 import ProjectSearch from "@/components/ProjectSearch/ProjectSearch";
 import { filteredProjectListSelector } from "../selectors/selectors";
+import AddIcon from "@/components/SVG/AddIcon";
 
 const ProjectList = () => {
   const [projectData, setProjectData] = useRecoilState(projectListState);
@@ -33,10 +34,8 @@ const ProjectList = () => {
   return (
     <Layout>
       <Grid container spacing={2}>
-        <Grid item xs={12}>
+        <Grid item xs={12} className="d--f jc--sb p--b1 ai--c">
           <Typography variant="h1">Projektek listázása</Typography>
-        </Grid>
-        <Grid item xs={12}>
           <ProjectSearch />
         </Grid>
         {filteredProjects.map((item) => {
@@ -53,7 +52,9 @@ const ProjectList = () => {
         })}
       </Grid>
       <Grid item xs={12}>
-        <Link href="/new-project">Hozzáad</Link>
+        <Link className="add-project-link d--f ai--c" href="/new-project">
+          <AddIcon /> Hozzáad
+        </Link>
       </Grid>
     </Layout>
   );

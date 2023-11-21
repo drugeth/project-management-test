@@ -1,7 +1,7 @@
 import { ChangeEvent, FC, Fragment, MouseEvent, useRef } from "react";
 import useForm from "@/hooks/Form";
 import { useSetRecoilState } from "recoil";
-import { Grid, TextField, Typography } from "@mui/material";
+import { Button, Grid, TextField, Typography } from "@mui/material";
 
 import ActionButtons from "./ActionButtons";
 import { currentWizardStepState, newProjectState } from "@/atoms/atoms";
@@ -16,7 +16,10 @@ const ProjectMembers: FC = () => {
   const formRef = useRef<HTMLFormElement | null>(null);
   const setActiveStep = useSetRecoilState(currentWizardStepState);
   const setNewProjectData = useSetRecoilState(newProjectState);
-  const initialValues: FormValues = {};
+  const initialValues: FormValues = {
+    "member[0].name": "",
+    "member[0].role": "",
+  };
   const validator: ValidatorInterface = {};
 
   const onSubmit = (values: { [key: string]: string }) => {
@@ -96,7 +99,7 @@ const ProjectMembers: FC = () => {
           </Grid>
           {Object.keys(values).map((fieldName, index) => (
             <Fragment key={fieldName}>
-              <Grid item xs={12}>
+              <Grid item xs={12} md={6}>
                 <TextField
                   fullWidth
                   variant="outlined"
@@ -114,12 +117,18 @@ const ProjectMembers: FC = () => {
             </Fragment>
           ))}
           <Grid item xs={12}>
-            <button type="button" onClick={addField}>
+            <Button
+              type="button"
+              variant="outlined"
+              onClick={addField}
+              sx={{ marginRight: "16px" }}
+            >
               Új tag hozzáadása
-            </button>
-            <button type="button" onClick={removeField}>
+            </Button>
+            <Button type="button" variant="outlined" onClick={removeField} color="error">
               Utolsó tag törlése
-            </button>
+            </Button>
+            <hr />
           </Grid>
           <Grid item xs={12}>
             <ActionButtons callback={handleCallback} />

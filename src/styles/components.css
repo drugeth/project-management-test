@@ -1,0 +1,87 @@
+.project-card.MuiPaper-root {
+  padding: 1.5rem;
+  box-shadow: 4px 4px 25px 5px rgba(0, 0, 0, 0.05);
+}
+
+.project-card .MuiCardContent-root {
+  padding: 0;
+}
+
+.project-card .title {
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.project-card .MuiCardActions-root {
+  padding: 16px 0 0 0;
+}
+
+.add-project-link {
+  background-color: var(--primary-color);
+  border-radius: 38px;
+  color: var(--white-bg-color);
+  display: flex;
+  gap: 8px;
+  font-weight: 500;
+  height: 48px;
+  margin-top: 24px;
+  padding: 2px 32px;
+  text-decoration: none;
+  width: 120px;
+}
+
+.add-project-link svg {
+  width: 36px;
+}
+
+.MuiStepper-root {
+  margin: 16px 0;
+}
+
+.MuiStepConnector-root .MuiStepConnector-line {
+  border-top-width: 6px;
+  border-color: var(--border-color);
+  border-radius: 4px;
+}
+
+.MuiStepLabel-iconContainer .MuiStepIcon-root.Mui-active,
+.MuiStepLabel-iconContainer .MuiStepIcon-root.Mui-completed {
+  color: var(--primary-color);
+}
+
+.MuiInputBase-root {
+  background-color: var(--white-bg-color);
+}
+
+.MuiInputBase-root .Mui-focused {
+  border-color: red !important;
+}
+
+.MuiFormControl-root .MuiInputLabel-root.Mui-focused {
+  color: var(--primary-color);
+}
+
+.MuiFormControl-root .MuiInputBase-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: var(--primary-color);
+}
+
+.MuiButton-root.MuiButton-contained.MuiButton-containedPrimary {
+  background-color: var(--primary-color);
+  border-radius: 26px;
+  padding: 16px 32px;
+  line-height: 1;
+}
+
+.MuiButton-root.MuiButton-outlined.MuiButton-outlinedPrimary,
+.MuiButton-root.MuiButton-outlined.MuiButton-outlinedError {
+  background-color: var(--white-bg-color);
+  border-radius: 26px;
+  color: var(--primary-color);
+  padding: 16px 32px;
+  line-height: 1;
+}
+
+.MuiButton-root.MuiButton-outlined.MuiButton-outlinedError {
+  border-color: var(--error-color);
+  color: var(--error-color);
+}

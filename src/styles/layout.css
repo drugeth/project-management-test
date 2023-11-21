@@ -20,6 +20,32 @@ footer {
   }
 }
 
+footer .MuiContainer-root {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+footer p {
+  margin: 4px 0;
+  font-size: 14px;
+}
+
+footer a {
+  font-size: 14px;
+  text-decoration: none;
+}
+
+a {
+  font-size: 16px;
+  text-decoration: underline;
+  color: var(--text-color);
+}
+
+a:hover {
+  text-decoration: none;
+}
+
 #root {
   display: flex;
   flex-direction: column;
@@ -30,4 +56,17 @@ footer {
 .small {
   margin: auto;
   max-width: 800px;
+}
+
+.action-buttons-container {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+hr {
+  background-color: var(--border-color);
+  border: none;
+  height: 1px;
+  margin: 32px 0 16px 0;
 }

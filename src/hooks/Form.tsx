@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { ValidatorInterface } from "@/interfaces/ValidatorInterface";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 

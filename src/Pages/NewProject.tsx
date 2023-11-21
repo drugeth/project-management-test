@@ -36,13 +36,15 @@ const NewProject = () => {
           </Stepper>
         </Grid>
         <Grid item xs={12}>
-          {activeStep === 0 ? (
+          <div className={activeStep !== 0 ? "hidden" : ""}>
             <ProjectBaseData />
-          ) : activeStep === 1 ? (
+          </div>
+          <div className={activeStep !== 1 ? "hidden" : ""}>
             <ProjectMembers />
-          ) : (
+          </div>
+          <div className={activeStep !== 2 ? "hidden" : ""}>
             <ProjectExternals />
-          )}
+          </div>
         </Grid>
       </Grid>
     </Layout>

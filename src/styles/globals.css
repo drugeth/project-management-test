@@ -4,6 +4,7 @@
   --white-bg-color: #ffffff;
   --text-color: #383838;
   --border-color: #e7e7e7;
+  --error-color: #ea0000;
   font-family: "Roboto", sans-serif;
   font-weight: 400;
 }

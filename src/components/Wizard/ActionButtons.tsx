@@ -15,7 +15,7 @@ const ActionButtons: FC<ChildProps> = ({ callback }) => {
   };
 
   return (
-    <>
+    <div className="action-buttons-container">
       {activeStep > 0 && (
         <Button variant="outlined" onClick={() => setActiveStep((prev) => prev - 1)}>
           Vissza
@@ -24,7 +24,7 @@ const ActionButtons: FC<ChildProps> = ({ callback }) => {
       <Button variant="contained" disableElevation onClick={handleSubmitClick} type="submit">
         Tovább
       </Button>
-    </>
+    </div>
   );
 };
 
